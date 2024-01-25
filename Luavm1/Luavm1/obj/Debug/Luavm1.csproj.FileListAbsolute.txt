@@ -1,0 +1,7 @@
+D:\LUACS\cs\Luavm1\Luavm1\Luavm1\obj\Debug\Luavm1.csproj.AssemblyReference.cache
+D:\LUACS\cs\Luavm1\Luavm1\Luavm1\obj\Debug\Luavm1.csproj.CoreCompileInputs.cache
+D:\LUACS\cs\Luavm1\Luavm1\Luavm1\bin\Debug\Luavm1.exe.config
+D:\LUACS\cs\Luavm1\Luavm1\Luavm1\bin\Debug\Luavm1.exe
+D:\LUACS\cs\Luavm1\Luavm1\Luavm1\bin\Debug\Luavm1.pdb
+D:\LUACS\cs\Luavm1\Luavm1\Luavm1\obj\Debug\Luavm1.exe
+D:\LUACS\cs\Luavm1\Luavm1\Luavm1\obj\Debug\Luavm1.pdb

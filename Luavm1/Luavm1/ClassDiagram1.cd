@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Luavm.binchunk.BinaryChunk" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAoQgYBABAAAAACQIAAEAAAAAAgBASABEQAAAAAAA=</HashCode>
+      <FileName>binchunk\BinaryChunk.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Luavm.binchunk.Reader" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAAAAYAAAAAAAAIAEAQAABAAAgIAAEACAlUAAAAAAA=</HashCode>
+      <FileName>binchunk\Reader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Luavm.Program" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAgAAAAAAgAAAAAgAAAAAAEAAAACAAAAQBAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Luavm.vm.Instruction" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAQAAEACABAAAAAAASAAAAAAAAAAAAAAAY=</HashCode>
+      <FileName>vm\Instruction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Luavm.vm.OpCodes" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GIAECAEYAQwBEAAEYAZkFgRCoAEIJgIA6AACImCAQAE=</HashCode>
+      <FileName>vm\OpCodes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Luavm.binchunk.binaryChunk" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAACAA=</HashCode>
+      <FileName>binchunk\BinaryChunk.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Luavm.binchunk.header" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAQAAAAEAAAAEAAAACAAACAAAAAAQAQAAAKAAAAA=</HashCode>
+      <FileName>binchunk\BinaryChunk.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Luavm.binchunk.Prototype" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAAAQgBAAAAAAAAgIAAAAAAAAAhAEAAAAIAABAQ=</HashCode>
+      <FileName>binchunk\BinaryChunk.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Luavm.binchunk.Upvalue" Collapsed="true">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>binchunk\BinaryChunk.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Luavm.binchunk.LocVar" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAACAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>binchunk\BinaryChunk.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Luavm.vm.opcode" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAJAAAAAAAAgAAAAAAAAAAAAAEAAAAAAAACAAAAEA=</HashCode>
+      <FileName>vm\OpCodes.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
