@@ -48,9 +48,13 @@
     <Compile Include="binchunk\BinaryChunk.cs" />
     <Compile Include="binchunk\Reader.cs" />
     <Compile Include="number\Math.cs" />
+    <Compile Include="number\Parser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="state\APiAccess.cs" />
+    <Compile Include="state\ApiArith.cs" />
+    <Compile Include="state\ApiCompare.cs" />
+    <Compile Include="state\ApiMisc.cs" />
     <Compile Include="state\ApiPush.cs" />
     <Compile Include="state\LuaStack.cs" />
     <Compile Include="state\LuaState.cs" />

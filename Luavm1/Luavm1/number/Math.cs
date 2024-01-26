@@ -44,6 +44,7 @@ namespace Luavm1.number
             return ShiftRight(a, (int)-n);
         }
 
+        //按位右移函数
         internal static long ShiftRight(long a, long n)
         {
             if (n >= 0)
@@ -52,6 +53,14 @@ namespace Luavm1.number
             }
 
             return ShiftLeft(a, -n);
+        }
+
+        //浮点数转换为整数
+        internal static Tuple<long,bool> FloatToInteger(double f)
+        {
+            var i = (long)f;
+            //f小数部分为0返回true，不为0返回false
+            return Tuple.Create(i, System.Math.Abs(i - f) <= 0);
         }
     }
 }

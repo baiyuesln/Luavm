@@ -18,16 +18,16 @@ namespace Luavm1
             ls.PushNumber(4.0);
             printStack(ls);
 
-            //ls.Arith(Consts.LUA_OPADD);
-            //printStack(ls);
-            //ls.Arith(Consts.LUA_OPBNOT);
-            //printStack(ls);
-            //ls.Len(2);
-            //printStack(ls);
-            //ls.Concat(3);
-            //printStack(ls);
-            //ls.PushBoolean(ls.Compare(1, 2, Consts.LUA_OPLE));
-            //printStack(ls);
+            ls.Arith(Consts.LUA_OPADD);
+            printStack(ls);
+            ls.Arith(Consts.LUA_OPBNOT);
+            printStack(ls);
+            ls.Len(2);
+            printStack(ls);
+            ls.Concat(3);
+            printStack(ls);
+            //ls.PushBoolean(ls.Compare(1, 2, Consts.LUA_OPLE));  无法比较  int string
+            printStack(ls);
 
             ls.PushBoolean(true);
             printStack(ls);

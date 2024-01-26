@@ -54,7 +54,8 @@ namespace Luavm1.state
             switch(val.GetType().Name)
             {
                 case "Double":return Tuple.Create((double)val, true);
-                case "Int64":return Tuple.Create(Convert.ToDouble(val), true);
+                case "Int64": return Tuple.Create(Convert.ToDouble(val), true);
+                case "String":return number.Parser.ParseFloat((string)val);
                 default: return Tuple.Create(0d, false);
             }
         }
@@ -64,9 +65,27 @@ namespace Luavm1.state
             switch (val.GetType().Name)
             {
                 case "Int64": return Tuple.Create<long, bool>((long)val, true);
+                case "Double":return number.Math.FloatToInteger((double)val);
                 case "String": return Tuple.Create(Convert.ToInt64(val), true);
                 default: return Tuple.Create(0L, false);
             }
+        }
+
+        //string解析为整数，如果不行解析为浮点数后再转为整数
+        private Tuple<long,bool> _stringToInteger(string s)
+        {
+            var v = number.Parser.ParseInteger(s);
+            if (v.Item2)
+            {
+                return Tuple.Create(v.Item1,true);
+            }
+            var v2 = number.Parser.ParseFloat(s);
+            if (v2.Item2)
+            {
+                return number.Math.FloatToInteger(v2.Item1);
+            }
+
+            return Tuple.Create<long, bool>(0L, false);
         }
     }
 }

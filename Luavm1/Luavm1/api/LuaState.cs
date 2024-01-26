@@ -46,9 +46,16 @@ namespace Luavm1.api
         void PushNumber(double n);
         void PushString(string s);
 
+        //执行算术和按位运算
         void Arith(ArithOp op);
+
+        //执行比较运算
         bool Compare(int idx1, int idx2, CompareOp op);
+
+        //执行长度运算
         void Len(int idx);
+
+        //执行字符串拼接运算
         void Concat(int n);
     }
 }

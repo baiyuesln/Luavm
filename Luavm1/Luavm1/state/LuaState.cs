@@ -130,25 +130,6 @@ namespace Luavm1.state
             }
         }
 
-        public void Arith(int op)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Compare(int idx1, int idx2, int op)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Len(int idx)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Concat(int n)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }
