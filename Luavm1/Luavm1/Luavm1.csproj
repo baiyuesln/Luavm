@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="api\Consts.cs" />
     <Compile Include="api\LuaState.cs" />
+    <Compile Include="api\LuaVm.cs" />
     <Compile Include="binchunk\BinaryChunk.cs" />
     <Compile Include="binchunk\Reader.cs" />
     <Compile Include="number\Math.cs" />
@@ -56,9 +57,14 @@
     <Compile Include="state\ApiCompare.cs" />
     <Compile Include="state\ApiMisc.cs" />
     <Compile Include="state\ApiPush.cs" />
+    <Compile Include="state\ApiVm.cs" />
     <Compile Include="state\LuaStack.cs" />
     <Compile Include="state\LuaState.cs" />
     <Compile Include="state\LuaValue.cs" />
+    <Compile Include="vm\InstFor.cs" />
+    <Compile Include="vm\InstLoad.cs" />
+    <Compile Include="vm\InstMisc.cs" />
+    <Compile Include="vm\InstOperators.cs" />
     <Compile Include="vm\Instruction.cs" />
     <Compile Include="vm\OpCodes.cs" />
   </ItemGroup>

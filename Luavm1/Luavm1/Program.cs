@@ -10,47 +10,48 @@ namespace Luavm1
     {
         private static void Main(string[] args)
         {
-            //第四章代码测试
-            var ls = Luavm1.state.LuaState.New();
-            ls.PushInteger(1);
-            ls.PushString("2.0");
-            ls.PushString("3.0");
-            ls.PushNumber(4.0);
-            printStack(ls);
+            ////第四,五章代码测试
+            //var ls = Luavm1.state.LuaState().New();
+    
+            //ls.PushInteger(1);
+            //ls.PushString("2.0");
+            //ls.PushString("3.0");
+            //ls.PushNumber(4.0);
+            //printStack(ls);
 
-            ls.Arith(Consts.LUA_OPADD);
-            printStack(ls);
-            ls.Arith(Consts.LUA_OPBNOT);
-            printStack(ls);
-            ls.Len(2);
-            printStack(ls);
-            ls.Concat(3);
-            printStack(ls);
-            //ls.PushBoolean(ls.Compare(1, 2, Consts.LUA_OPLE));  无法比较  int string
-            printStack(ls);
+            //ls.Arith(Consts.LUA_OPADD);
+            //printStack(ls);
+            //ls.Arith(Consts.LUA_OPBNOT);
+            //printStack(ls);
+            //ls.Len(2);
+            //printStack(ls);
+            //ls.Concat(3);
+            //printStack(ls);
+            ////ls.PushBoolean(ls.Compare(1, 2, Consts.LUA_OPLE));  无法比较  int string
+            //printStack(ls);
 
-            ls.PushBoolean(true);
-            printStack(ls);
-            ls.PushInteger(10);
-            printStack(ls);
-            ls.PushNil();
-            printStack(ls);
-            ls.PushString("hello");
-            printStack(ls);
-            ls.PushValue(-4);
-            printStack(ls);
-            ls.Replace(3);
-            printStack(ls);
-            ls.SetTop(6);
-            printStack(ls);
-            ls.Remove(-3);
-            printStack(ls);
-            ls.SetTop(-5);
-            printStack(ls);
-            ls.PushNumber(34.2);
-            printStack(ls);
-            ls.PushString("SS");
-            printStack(ls);
+            //ls.PushBoolean(true);
+            //printStack(ls);
+            //ls.PushInteger(10);
+            //printStack(ls);
+            //ls.PushNil();
+            //printStack(ls);
+            //ls.PushString("hello");
+            //printStack(ls);
+            //ls.PushValue(-4);
+            //printStack(ls);
+            //ls.Replace(3);
+            //printStack(ls);
+            //ls.SetTop(6);
+            //printStack(ls);
+            //ls.Remove(-3);
+            //printStack(ls);
+            //ls.SetTop(-5);
+            //printStack(ls);
+            //ls.PushNumber(34.2);
+            //printStack(ls);
+            //ls.PushString("SS");
+            //printStack(ls);
             //2,3章代码测试
             //if (args.Length <= 0) return;
             try

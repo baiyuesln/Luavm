@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Luavm1.binchunk;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Luavm1.state
@@ -7,15 +8,19 @@ namespace Luavm1.state
     public partial struct LuaState : api.LuaState
     {
         private LuaStack stack;
+        private Prototype proto;
+        private int pc;
 
         public int LuaType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         //创建luaState实例
-        public static api.LuaState New()
+        public api.LuaState New(int stackSize,Prototype proto)
         {
             return new LuaState
             {
-                stack = LuaStack.newLuaStack(20)
+                stack = LuaStack.newLuaStack(stackSize),
+                proto = proto,
+                pc = 0
             };
         }
 

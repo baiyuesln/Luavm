@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Luavm1.vm
 {
+    //指令
     public class Instruction
     {
         //构造
