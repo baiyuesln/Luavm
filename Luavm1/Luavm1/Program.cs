@@ -12,7 +12,7 @@ namespace Luavm1
         {
             ////第四,五章代码测试
             //var ls = Luavm1.state.LuaState().New();
-    
+
             //ls.PushInteger(1);
             //ls.PushString("2.0");
             //ls.PushString("3.0");
@@ -52,6 +52,8 @@ namespace Luavm1
             //printStack(ls);
             //ls.PushString("SS");
             //printStack(ls);
+
+
             //2,3章代码测试
             //if (args.Length <= 0) return;
             try
@@ -62,11 +64,36 @@ namespace Luavm1
                 // 从文件流中读取数据到字节数组
                 fs.Read(data, 0, data.Length);
                 var proto = BinaryChunk.Undump(data);
-                list(proto);
+                luaMain(proto);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+            }
+        }
+
+        static void luaMain(Prototype proto)
+        {
+            var nRegs = proto.MaxStackSize;
+            var ls = new state.LuaState().New(nRegs + 8, proto);
+            ls.SetTop(nRegs);
+            for (; ; )
+            {
+                //返回当前PC,取出当前指令，取出操作码
+                var pc = ls.PC();
+                var inst = new Instruction(ls.Fetch());
+                var opCode = inst.Opcode();
+
+                if(opCode != OpCodes.OP_RETURN)
+                {
+                    inst.Execute(ls);
+                    Console.Write("[{0:D2}] {1}", pc + 1, inst.OpName());
+                    printStack(ls);
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 

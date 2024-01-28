@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LuaVm = Luavm1.api.LuaState;
 
 namespace Luavm1.vm
 {
@@ -84,6 +81,19 @@ namespace Luavm1.vm
         public byte CMode()
         {
             return OpCodes.opcodes[Opcode()].argCMode;
+        }
+
+        public void Execute(LuaVm vm)
+        {
+            var action = OpCodes.opcodes[Opcode()].action;
+            if (action != null)
+            {
+                action(this, vm);
+            }
+            else
+            {
+                throw new Exception(OpName());
+            }
         }
     }
 }

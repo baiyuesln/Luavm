@@ -128,7 +128,7 @@ namespace Luavm1.state
             }
             else if(n<0)
             {
-                for(var i = 0; i < n; i++)
+                for(var i = 0; i > n; i--)
                 {
                     stack.push(null);
                 }

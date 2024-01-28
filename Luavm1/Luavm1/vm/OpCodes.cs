@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LuaVm = Luavm1.api.LuaState;
 
 namespace Luavm1.vm
 {
@@ -72,55 +68,54 @@ namespace Luavm1.vm
         //完整的指令表定
         internal static opcode[] opcodes =
         {
-            //T      A         B           C         mode          name         action
-            new opcode(0, 1, OpArgR, OpArgN, IABC, "MOVE    "), // R(A) := R(B)
-            new opcode(0, 1, OpArgK, OpArgN, IABx, "LOADK   "), // R(A) := Kst(Bx)
-            new opcode(0, 1, OpArgN, OpArgN, IABx, "LOADKX  "), // R(A) := Kst(extra arg)
-            new opcode(0, 1, OpArgU, OpArgU, IABC, "LOADBOOL"), // R(A) := (bool)B; if (C) pc++
-            new opcode(0, 1, OpArgU, OpArgN, IABC, "LOADNIL "), // R(A), R(A+1), ..., R(A+B) := nil
-            new opcode(0, 1, OpArgU, OpArgN, IABC, "GETUPVAL"), // R(A) := UpValue[B]
-            new opcode(0, 1, OpArgU, OpArgK, IABC, "GETTABUP"), // R(A) := UpValue[B][RK(C)]
-            new opcode(0, 1, OpArgR, OpArgK, IABC /* */, "GETTABLE"), // R(A) := R(B)[RK(C)]
-            new opcode(0, 0, OpArgK, OpArgK, IABC /* */, "SETTABUP"), // UpValue[A][RK(B)] := RK(C)
-            new opcode(0, 0, OpArgU, OpArgN, IABC /* */, "SETUPVAL"), // UpValue[B] := R(A)
-            new opcode(0, 0, OpArgK, OpArgK, IABC /* */, "SETTABLE"), // R(A)[RK(B)] := RK(C)
-            new opcode(0, 1, OpArgU, OpArgU, IABC /* */, "NEWTABLE"), // R(A) := {} (size = B,C)
-            new opcode(0, 1, OpArgR, OpArgK, IABC /* */, "SELF    "), // R(A+1) := R(B); R(A) := R(B)[RK(C)]
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "ADD     "), // R(A) := RK(B) + RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "SUB     "), // R(A) := RK(B) - RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "MUL     "), // R(A) := RK(B) * RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "MOD     "), // R(A) := RK(B) % RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "POW     "), // R(A) := RK(B) ^ RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "DIV     "), // R(A) := RK(B) / RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "IDIV    "), // R(A) := RK(B) // RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "BAND    "), // R(A) := RK(B) & RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "BOR     "), // R(A) := RK(B) | RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "BXOR    "), // R(A) := RK(B) ~ RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "SHL     "), // R(A) := RK(B) << RK(C)
-            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "SHR     "), // R(A) := RK(B) >> RK(C)
-            new opcode(0, 1, OpArgR, OpArgN, IABC /* */, "UNM     "), // R(A) := -R(B)
-            new opcode(0, 1, OpArgR, OpArgN, IABC /* */, "BNOT    "), // R(A) := ~R(B)
-            new opcode(0, 1, OpArgR, OpArgN, IABC /* */, "NOT     "), // R(A) := not R(B)
-            new opcode(0, 1, OpArgR, OpArgN, IABC /* */, "LEN     "), // R(A) := length of R(B)
-            new opcode(0, 1, OpArgR, OpArgR, IABC /* */, "CONCAT  "), // R(A) := R(B).. ... ..R(C)
-            new opcode(0, 0, OpArgR, OpArgN, IAsBx, "JMP     "),
-            new opcode(1, 0, OpArgK, OpArgK, IABC, "EQ      "),
-            new opcode(1, 0, OpArgK, OpArgK, IABC, "LT      "),
-            new opcode(1, 0, OpArgK, OpArgK, IABC, "LE      "),
-            new opcode(1, 0, OpArgN, OpArgU, IABC, "TEST    "),
-            new opcode(1, 1, OpArgR, OpArgU, IABC, "TESTSET "),
-            new opcode(0, 1, OpArgU, OpArgU, IABC /* */, "CALL    "),
-            new opcode(0, 1, OpArgU, OpArgU, IABC /* */, "TAILCALL"), // return R(A)(R(A+1), ... ,R(A+B-1))
-            new opcode(0, 0, OpArgU, OpArgN, IABC /* */, "RETURN  "), // return R(A), ... ,R(A+B-2)
-            new opcode(0, 1, OpArgR, OpArgN, IAsBx /**/, "FORLOOP "),
-            new opcode(0, 1, OpArgR, OpArgN, IAsBx /**/, "FORPREP "), // R(A)-=R(A+2); pc+=sBx
-            new opcode(0, 0, OpArgN, OpArgU, IABC /* */, "TFORCALL"),
-            new opcode(0, 1, OpArgR, OpArgN, IAsBx /**/, "TFORLOOP"),
-            new opcode(0, 0, OpArgU, OpArgU, IABC /* */, "SETLIST "),
-            new opcode(0, 1, OpArgU, OpArgN, IABx /* */, "CLOSURE "),
-            new opcode(0, 1, OpArgU, OpArgN, IABC /* */, "VARARG  "),
-            new opcode(0, 0, OpArgU, OpArgU, IAx /*  */, "EXTRAARG"),
-
+            /*   T            A             B                     C                   mode         name              action*/
+            new opcode(0, 1, OpArgR, OpArgN, IABC, "MOVE    ", InstMisc.move), // R(A) := R(B)
+            new opcode(0, 1, OpArgK, OpArgN, IABx, "LOADK   ", InstLoad.loadK), // R(A) := Kst(Bx)
+            new opcode(0, 1, OpArgN, OpArgN, IABx, "LOADKX  ", InstLoad.loadKx), // R(A) := Kst(extra arg)
+            new opcode(0, 1, OpArgU, OpArgU, IABC, "LOADBOOL", InstLoad.loadBool), // R(A) := (bool)B; if (C) pc++
+            new opcode(0, 1, OpArgU, OpArgN, IABC, "LOADNIL ", InstLoad.loadNil), // R(A), R(A+1), ..., R(A+B) := nil
+            new opcode(0, 1, OpArgU, OpArgN, IABC, "GETUPVAL", null), // R(A) := UpValue[B]
+            new opcode(0, 1, OpArgU, OpArgK, IABC, "GETTABUP", null), // R(A) := UpValue[B][RK(C)]
+            new opcode(0, 1, OpArgR, OpArgK, IABC /* */, "GETTABLE", null), // R(A) := R(B)[RK(C)]
+            new opcode(0, 0, OpArgK, OpArgK, IABC /* */, "SETTABUP", null), // UpValue[A][RK(B)] := RK(C)
+            new opcode(0, 0, OpArgU, OpArgN, IABC /* */, "SETUPVAL", null), // UpValue[B] := R(A)
+            new opcode(0, 0, OpArgK, OpArgK, IABC /* */, "SETTABLE", null), // R(A)[RK(B)] := RK(C)
+            new opcode(0, 1, OpArgU, OpArgU, IABC /* */, "NEWTABLE", null), // R(A) := {} (size = B,C)
+            new opcode(0, 1, OpArgR, OpArgK, IABC /* */, "SELF    ", null), // R(A+1) := R(B); R(A) := R(B)[RK(C)]
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "ADD     ", InstOperators.add), // R(A) := RK(B) + RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "SUB     ", InstOperators.sub), // R(A) := RK(B) - RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "MUL     ", InstOperators.mul), // R(A) := RK(B) * RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "MOD     ", InstOperators.mod), // R(A) := RK(B) % RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "POW     ", InstOperators.pow), // R(A) := RK(B) ^ RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "DIV     ", InstOperators.div), // R(A) := RK(B) / RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "IDIV    ", InstOperators.idiv), // R(A) := RK(B) // RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "BAND    ", InstOperators.band), // R(A) := RK(B) & RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "BOR     ", InstOperators.bor), // R(A) := RK(B) | RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "BXOR    ", InstOperators.bxor), // R(A) := RK(B) ~ RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "SHL     ", InstOperators.shl), // R(A) := RK(B) << RK(C)
+            new opcode(0, 1, OpArgK, OpArgK, IABC /* */, "SHR     ", InstOperators.shr), // R(A) := RK(B) >> RK(C)
+            new opcode(0, 1, OpArgR, OpArgN, IABC /* */, "UNM     ", InstOperators.unm), // R(A) := -R(B)
+            new opcode(0, 1, OpArgR, OpArgN, IABC /* */, "BNOT    ", InstOperators.bnot), // R(A) := ~R(B)
+            new opcode(0, 1, OpArgR, OpArgN, IABC /* */, "NOT     ", InstOperators.not), // R(A) := not R(B)
+            new opcode(0, 1, OpArgR, OpArgN, IABC /* */, "LEN     ", InstOperators.length), // R(A) := length of R(B)
+            new opcode(0, 1, OpArgR, OpArgR, IABC /* */, "CONCAT  ", InstOperators.concat), // R(A) := R(B).. ... ..R(C)
+            new opcode(0, 0, OpArgR, OpArgN, IAsBx, "JMP     ", InstMisc.jmp),
+            new opcode(1, 0, OpArgK, OpArgK, IABC, "EQ      ", InstOperators.eq),
+            new opcode(1, 0, OpArgK, OpArgK, IABC, "LT      ", InstOperators.lt),
+            new opcode(1, 0, OpArgK, OpArgK, IABC, "LE      ", InstOperators.le),
+            new opcode(1, 0, OpArgN, OpArgU, IABC, "TEST    ", InstOperators.test),
+            new opcode(1, 1, OpArgR, OpArgU, IABC, "TESTSET ", InstOperators.testSet),
+            new opcode(0, 1, OpArgU, OpArgU, IABC /* */, "CALL    ", null),
+            new opcode(0, 1, OpArgU, OpArgU, IABC /* */, "TAILCALL", null), // return R(A)(R(A+1), ... ,R(A+B-1))
+            new opcode(0, 0, OpArgU, OpArgN, IABC /* */, "RETURN  ", null), // return R(A), ... ,R(A+B-2)
+            new opcode(0, 1, OpArgR, OpArgN, IAsBx /**/, "FORLOOP ", InstFor.forLoop),
+            new opcode(0, 1, OpArgR, OpArgN, IAsBx /**/, "FORPREP ", InstFor.forPrep), // R(A)-=R(A+2); pc+=sBx
+            new opcode(0, 0, OpArgN, OpArgU, IABC /* */, "TFORCALL", null),
+            new opcode(0, 1, OpArgR, OpArgN, IAsBx /**/, "TFORLOOP", null),
+            new opcode(0, 0, OpArgU, OpArgU, IABC /* */, "SETLIST ", null),
+            new opcode(0, 1, OpArgU, OpArgN, IABx /* */, "CLOSURE ", null),
+            new opcode(0, 1, OpArgU, OpArgN, IABC /* */, "VARARG  ", null),
+            new opcode(0, 0, OpArgU, OpArgU, IAx /*  */, "EXTRAARG", null),
         };
     }
 
@@ -135,8 +130,9 @@ namespace Luavm1.vm
         internal byte argCMode;
         internal byte opMode;
         internal string name;
+        internal Action action;
 
-        public opcode(byte testFlag, byte setAFlag, byte argBMode, byte argCMode, byte opMode, string name)
+        public opcode(byte testFlag, byte setAFlag, byte argBMode, byte argCMode, byte opMode, string name,Action action)
         {
             this.testFlag = testFlag;
             this.setAFlag = setAFlag;
@@ -144,6 +140,10 @@ namespace Luavm1.vm
             this.argCMode = argCMode;
             this.opMode = opMode;
             this.name = name;
+            this.action = action;
         }
     }
+
+    // 定义委托类型 Action，用于指令的执行
+    delegate void Action(Instruction i, LuaVm vm);
 }
