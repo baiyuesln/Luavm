@@ -17,20 +17,61 @@ namespace Luavm1.state
             this.value = value;
         }
 
-        //根据变量值返回其类型
-        internal static LuaType typeOf(object val)
+        public LuaTable toLuaTable()
         {
-            if(val == null)
+            return (LuaTable)value;
+        }
+
+        public string toString()
+        {
+            return Convert.ToString(value);
+        }
+
+        public long toInteger()
+        {
+            return Convert.ToInt64(value);
+        }
+
+        public double toFloat()
+        {
+            return Convert.ToDouble(value);
+        }
+
+        public bool isString()
+        {
+            return value.GetType().IsEquivalentTo(typeof(string));
+        }
+
+        public bool isLuaTable()
+        {
+            return value.GetType().IsEquivalentTo(typeof(LuaTable));
+        }
+
+        public bool isFloat()
+        {
+            return value.GetType().IsEquivalentTo(typeof(double));
+        }
+
+        public bool isInteger()
+        {
+            return value.GetType().IsEquivalentTo(typeof(long));
+        }
+
+        //根据变量值返回其类型
+        internal LuaType typeOf()
+        {
+            if(value == null)
             {
                 return Consts.LUA_TNIL;
             }
 
-            switch(val.GetType().Name)
+            switch(value.GetType().Name)
             {
                 case "Boolean": return Consts.LUA_TBOOLEAN;
                 case "Double": return Consts.LUA_TNUMBER;
                 case "Int64": return Consts.LUA_TNUMBER;
                 case "String": return Consts.LUA_TSTRING;
+                case "LuaTable":return Consts.LUA_TTABLE;
                 default:throw new Exception("type todo!");
             }
         }

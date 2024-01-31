@@ -55,17 +55,22 @@
     <Compile Include="state\APiAccess.cs" />
     <Compile Include="state\ApiArith.cs" />
     <Compile Include="state\ApiCompare.cs" />
+    <Compile Include="state\ApiGet.cs" />
     <Compile Include="state\ApiMisc.cs" />
     <Compile Include="state\ApiPush.cs" />
+    <Compile Include="state\ApiSet.cs" />
     <Compile Include="state\ApiVm.cs" />
     <Compile Include="state\LuaStack.cs" />
     <Compile Include="state\LuaState.cs" />
+    <Compile Include="state\LuaTable.cs" />
     <Compile Include="state\LuaValue.cs" />
+    <Compile Include="vm\Fpb.cs" />
     <Compile Include="vm\InstFor.cs" />
     <Compile Include="vm\InstLoad.cs" />
     <Compile Include="vm\InstMisc.cs" />
     <Compile Include="vm\InstOperators.cs" />
     <Compile Include="vm\Instruction.cs" />
+    <Compile Include="vm\InstTable.cs" />
     <Compile Include="vm\OpCodes.cs" />
   </ItemGroup>
   <ItemGroup>

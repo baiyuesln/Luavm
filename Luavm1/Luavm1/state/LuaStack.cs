@@ -110,5 +110,20 @@ namespace Luavm1.state
                 System.Array.Reverse(slots,to,from-to +1);
             }
         }
+
+        //写表逻辑抽取成SetTable()方法
+        internal void setTable(int idx, LuaValue k, LuaValue v)
+        {
+            var t = get(idx);
+            if (new LuaValue(t).isLuaTable())
+            {
+                var tbl = (LuaTable)t;
+                tbl.put(k, v);
+                set(idx, tbl);
+                return;
+            }
+
+            throw new Exception("not a table!");
+        }
     }
 }

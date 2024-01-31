@@ -57,5 +57,23 @@ namespace Luavm1.api
 
         //执行字符串拼接运算
         void Concat(int n);
+
+        //表操作API ---->get类
+        void NewTable();
+
+        void CreateTable(int nArr, int nRec);
+
+        LuaType GetTable(int idx);
+
+        LuaType GetField(int idx, string k);
+
+        LuaType GetI(int idx, long i);
+
+        //表操作API ---->set类
+        void SetTable(int idx);
+
+        void SetField(int idx, string k);
+
+        void SetI(int idx, long n);
     }
 }

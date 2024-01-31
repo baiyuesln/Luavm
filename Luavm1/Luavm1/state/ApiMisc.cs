@@ -5,13 +5,18 @@ namespace Luavm1.state
     public partial struct LuaState
     {
         //访问指定处索引的值，取其长度，然后推入栈顶
-        public void Len(int dex)
+        public void Len(int idx)
         {
-            var val = stack.get(dex);
-            if (val.GetType().Name.Equals("String"))
+            var val = stack.get(idx);
+            if(new LuaValue(val).isString())
             {
-                var s = (string)val;
+                var s = new LuaValue(val).toString();
                 stack.push((long)s.Length);
+            }
+            else if (new LuaValue(val).isLuaTable())
+            {
+                var t = new LuaValue(val).toLuaTable();
+                stack.push((long)t.len());
             }
             else
             {

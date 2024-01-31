@@ -29,7 +29,7 @@ namespace Luavm1.state
         {
             if (!stack.isValid(idx)) return Consts.LUA_TNONE;
             var val = stack.get(idx);
-            return LuaValue.typeOf(val);
+            return new LuaValue(val).typeOf();
         }
 
         //判断给定索引的值是否属于下面类型
